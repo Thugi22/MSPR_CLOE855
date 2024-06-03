@@ -34,6 +34,7 @@ jobs:
             else
               echo "Le répertoire flask de destination sur votre serveur n'existe pas"
               exit 1
+            fi
   Restart:
     needs: Copy
     runs-on: ubuntu-latest
@@ -52,3 +53,4 @@ jobs:
           else
             echo "Échec du redémarrage avec le code de réponse : $response_code"
             exit 1
+          fi
