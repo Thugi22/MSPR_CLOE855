@@ -9,9 +9,11 @@ USER_CREDENTIALS = {
     'user': '12345'
 }
 
+# Fonction pour vérifier les identifiants utilisateur
 def check_user_auth(username, password):
     return USER_CREDENTIALS.get(username) == password
 
+# Décorateur pour protéger les routes avec authentification utilisateur
 def user_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -21,6 +23,7 @@ def user_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+# Nouvelle route pour rechercher un client par nom
 @app.route('/fiche_nom/<name>', methods=['GET'])
 @user_required
 def get_client_by_name(name):
