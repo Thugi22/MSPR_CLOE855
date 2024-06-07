@@ -21,20 +21,21 @@ def user_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-@app.route('/fiche_nom/<name>', methods=['GET'])
+@app.route('/fiche_nom/<nom>', methods=['GET'])
 @user_required
-def get_client_by_name(name):
+def get_client_by_name(nom):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM clients WHERE name = ?", (name,))
+    cursor.execute("SELECT * FROM clients WHERE nom = ?", (nom,))
     client = cursor.fetchone()
     conn.close()
     
     if client:
         return jsonify({
             'id': client[0],
-            'name': client[1],
-            'other_info': client[2]
+            'nom': client[1],
+            'prenom': client[2],
+            'adresse': client[3]
         })
     else:
         return abort(404, description="Client not found")
