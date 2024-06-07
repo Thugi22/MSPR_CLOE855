@@ -33,9 +33,9 @@ def get_client_by_name(nom):
     if client:
         return jsonify({
             'id': client[0],
-            'nom': client[1],
-            'prenom': client[2],
-            'adresse': client[3]
+            'nom': client[2],  # 'nom' corresponds to the second index
+            'prenom': client[3],  # 'prenom' corresponds to the third index
+            'adresse': client[4]  # 'adresse' corresponds to the fourth index
         })
     else:
         return abort(404, description="Client not found")
